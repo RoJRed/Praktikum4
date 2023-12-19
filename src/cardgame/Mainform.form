@@ -70,6 +70,22 @@
           <text value="nächste Karte"/>
         </properties>
       </component>
+      <component id="13588" class="javax.swing.JButton" binding="Button1">
+        <constraints>
+          <grid row="3" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Black"/>
+        </properties>
+      </component>
+      <component id="6caef" class="javax.swing.JButton" binding="Button2">
+        <constraints>
+          <grid row="3" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Red"/>
+        </properties>
+      </component>
     </children>
   </grid>
 </form>

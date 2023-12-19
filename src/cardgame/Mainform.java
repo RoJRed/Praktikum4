@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URL;
 import java.util.Random;
 
 public class Mainform {
@@ -12,10 +13,14 @@ public class Mainform {
     private JLabel labPos1;
     private JButton neueKarte;
     private JButton naechste;
+    private JButton Button1;
+    private JButton Button2;
 
     private JDialog blackRed;
 
     private String[][] deck = new String[52][2];
+    private int cardNo = 1;
+    private int round = 1;
 
 
     public Mainform() {
@@ -29,7 +34,21 @@ public class Mainform {
         naechste.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                naechsteKarte();
+                naechsteKarte("red");
+            }
+        });
+
+        Button1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                naechsteKarte("opt1");
+            }
+        });
+
+        Button1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                naechsteKarte("opt2");
             }
         });
     }
@@ -42,19 +61,19 @@ public class Mainform {
             deck[i-1][0] = path;
 
             if (i <= 13) {
-                deck[i-1][1] = i.toString();
+                deck[i-1][1] = String.valueOf(i);
                 deck[i-1][2] = "red";
             }
             else if (i>13 && i <=25) {
-                deck[i-1][1] = (i-13).toString();
+                deck[i-1][1] = String.valueOf((i-13));
                 deck[i-1][2] = "red";
             }
-            else if (i>13 && i <=38) {
-                deck[i-1][1] = (i-25).toString();
+            else if (i>13 && i<=38) {
+                deck[i-1][1] = String.valueOf((i-25));
                 deck[i-1][2] = "black";
             }
-            else if (i>13 && i <=52) {
-                deck[i-1][1] = (i-38).toString();
+            else if (i>13 && i<=52) {
+                deck[i-1][1] = String.valueOf((i-38));
                 deck[i-1][2] = "black";
             }
         }
@@ -80,36 +99,41 @@ public class Mainform {
         }
     }
 
-    public void naechsteKarte() {
-        for (int i = 1; i<=4; i++) {
-            switch (i) {
-                case 1:
-                    if (deck[i][2] = ""
-                    testRed();
+    public void naechsteKarte(String opt) {
+        cardNo++;
 
-                    Dialog dlg = new Dialog(this, Colorform);
-                    String result = dlg.showDialog();
-                    break;
-                case 2:
-                    testHigher();
-                    break;
-                case 3:
-                    testInOut();
-                    break;
-                case 4:
-                    testSymbol();
-                    break;
-                    i = 1;
-            }
-        }
-    }
+        URL iconURL = getClass().getResource("./res/card" + cardNo + ".png");
+        ImageIcon icon = new ImageIcon(iconURL);
+        Button1.setIcon(icon);
 
-    public boolean testRed() {
-        if (number <= 1) {
-            return true;
-        }
-        else {
-            return false;
+        switch (round) {
+            case 1:
+                if ( (opt == "red" && deck[cardNo-1][2] == "red") | (opt == "black" && deck[cardNo-1][2] == "black") ) {
+
+                    round = 2;
+                    Button1.setText("Höher");
+                    Button1.setText("Tiefer");
+                }
+                else {
+
+                }
+                break;
+            case 2:
+                if ( opt == "higher" && Integer.valueOf(deck[cardNo-1][1]) < Integer.valueOf(deck[cardNo-2][1])) {
+
+                    round = 3;
+                    Button1.setText("Drinnen");
+                    Button1.setText("Draußen");
+                }
+                else {
+
+                }
+                break;
+            case 3:
+                break;
+            case 4:
+                round = 1;
+                break;
         }
     }
 
